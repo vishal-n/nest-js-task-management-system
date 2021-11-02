@@ -17,7 +17,7 @@ export class TasksService {
     return this.tasks.find((task) => task.id === id);
   }
 
-  // Creates a new task task and pushed it to the array
+  // Creates a new task task and pushes it to the array
   createTask(createTaskDto: CreateTaskDto): Task {
     const { title, description } = createTaskDto;
     const task: Task = {
@@ -34,5 +34,12 @@ export class TasksService {
   // Deletes a given task
   deleteTask(id: string): void {
     this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  // Updates a task's status by id
+  updateTaskStatus(id: string, new_status: TaskStatus): Task {
+    const givenTask = this.getTaskById(id);
+    givenTask.status = new_status;
+    return givenTask;
   }
 }
